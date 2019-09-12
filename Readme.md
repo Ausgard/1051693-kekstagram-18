@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Serhii Rodik](https://up.htmlacademy.ru/javascript/18/user/1051693).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Устенко](https://up.htmlacademy.ru/profile/novomanu).
 
 ---
 
