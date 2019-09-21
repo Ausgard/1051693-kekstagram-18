@@ -5,13 +5,14 @@ var getRandomNumber = function (min, max) {
 }
 
 var comments = [
-  'Все Отлично',
-  'Не передаваемые эмоции',
-  'Какой снимок красивый',
-  'Velikolepno😍',
-  'Ого! Это вы где?',
-  'Очень красивый вид , фотография захватывает дух 👍🏔️',
-  'Ваши публикации всегда очень интересные👍🏻'
+  'Все Отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра.',
+  'В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают.',
+  'Как можно было поймать такой неудачный момент?!'
 ]
 
 var authors = [
@@ -34,8 +35,8 @@ var createRandomComments = function (length) {
   var array = []
   for (var i = 0; i < length; i++) {
     array.push({
-      avatar: 'img/avatar-6.svg',
-      message: comments[getRandomNumber(0, 6)],
+      avatar: 'img/avatar-'+ getRandomNumber(1, 6) +'.svg',
+      message: comments[getRandomNumber(0, 7)],
       name: authors[getRandomNumber(0, 12)]
     })
   }
@@ -46,17 +47,57 @@ var createDemoDataArray = function (length) {
   var array = []
   for (var i = 0; i < length; i++) {
     var photo = {
-      url: 'photos/' + i + '.jpg',
+      url: 'photos/' + (i + 1) + '.jpg',
       description: 'My favorite photo',
       likes: getRandomNumber(15, 200),
-      comments: createRandomComments(getRandomNumber(0, 6))
+      comments: createRandomComments(getRandomNumber(0, 7))
     }
     array.push(photo);
   }
   return array;
-
 }
 
 var photos = createDemoDataArray(25);
 
 console.log(photos);
+
+// Создание DOM-элемента на основе JS-объекта
+var PictureLink = function() {
+var array = [];
+  for (i = 0; i <= photos.length; i++) {
+
+var createPictureLink = document.createElement('a');
+var createPictureImg = document.createElement('img');
+var createPictureInfo = document.createElement('p');
+var createPictureComments = document.createElement('span');
+var createPictureLikes = document.createElement('span');
+
+var childImg = createPictureLink.appendChild(createPictureImg);
+var childInfo = createPictureLink.appendChild(createPictureInfo);
+var childComments = childInfo.appendChild(createPictureComments);
+var childComments = childInfo.appendChild(createPictureLikes);
+
+createPictureLink.setAttribute('href', '#');
+createPictureImg.setAttribute('src', ' ');
+createPictureImg.setAttribute('width', '182');
+createPictureImg.setAttribute('height', '182');
+createPictureImg.setAttribute('alt', 'Случайная фотография');
+
+createPictureLink.classList.add("picture");
+createPictureImg.classList.add("picture__img");
+createPictureInfo.classList.add("picture__info");
+createPictureComments.classList.add("picture__comments");
+createPictureLikes.classList.add("picture__likes");
+
+}
+
+return array;
+
+}
+
+var PictureLinkBlock = PictureLink();
+
+console.log(PictureLinkBlock);
+
+
+// createPictureLikes.innerHTML = getRandomNumber(15, 200);
