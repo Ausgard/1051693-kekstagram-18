@@ -64,13 +64,26 @@ var PictureLink = function(length) {
 var createPictureLink = document.createElement('a');
 var createPictureImg = document.createElement('img');
 var createPictureInfo = document.createElement('p');
-var createPictureComments = document.createElement('span');
 var createPictureLikes = document.createElement('span');
+var createPictureComments = document.createElement('span');
+
+ // массив спанов с коментами
+var pictureCommentsArray = function(length) {
+  var array = []
+  for (i= 0; i < length; i++) {
+    array.push(createPictureComments);
+  }
+  return array;
+}
+
+var commentsArray = pictureCommentsArray(getRandomNumber(1, 10));
+
+console.log(commentsArray);
 
 var childImg;
 var childInfo;
 var childComments;
-var childComments;
+var childLikes;
 
 var array = []
 
@@ -78,8 +91,9 @@ var array = []
 
 childImg = createPictureLink.appendChild(createPictureImg);
 childInfo = createPictureLink.appendChild(createPictureInfo);
-childComments = childInfo.appendChild(createPictureComments);
-childComments = childInfo.appendChild(createPictureLikes);
+childLikes = childInfo.appendChild(createPictureLikes);
+
+childComments = childInfo.appendChild(createPictureComments); // спан с коментами по идее нужно вставить commentsArray вместо createPictureComments
 
 createPictureLink.setAttribute('href', '#');
 createPictureImg.setAttribute('src', ' ');
@@ -90,8 +104,12 @@ createPictureImg.setAttribute('alt', 'Случайная фотография');
 createPictureLink.classList.add("picture");
 createPictureImg.classList.add("picture__img");
 createPictureInfo.classList.add("picture__info");
-createPictureComments.classList.add("picture__comments");
+// createPictureComments.classList.add("picture__comments");
 createPictureLikes.classList.add("picture__likes");
+
+createPictureLikes.innerHTML = getRandomNumber(15, 200);
+createPictureComments.innerHTML = comments[getRandomNumber(0, 7)];
+
 
 array.push(createPictureLink);
 }
@@ -102,8 +120,15 @@ return array;
 var pictureLinkArray = PictureLink(photos.length);
 
 console.log(photos);
-console.log(pictureLinkArray);
+console.log(pictureLinkArray[0]);
+
+// Заполнение блока DOM-элементами на основе массива JS-объектов
 
 
+
+
+// var test = document.querySelector('#picture');
+
+// console.log(test);
 
 // createPictureLikes.innerHTML = getRandomNumber(15, 200);
