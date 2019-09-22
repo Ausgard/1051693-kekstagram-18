@@ -59,6 +59,7 @@ var createDemoDataArray = function (length) {
 var photos = createDemoDataArray(25);
 
 // Создание DOM-элемента на основе JS-объекта
+
 var PictureLink = function(length) {
 
 var createPictureLink = document.createElement('a');
@@ -66,19 +67,6 @@ var createPictureImg = document.createElement('img');
 var createPictureInfo = document.createElement('p');
 var createPictureLikes = document.createElement('span');
 var createPictureComments = document.createElement('span');
-
- // массив спанов с коментами
-var pictureCommentsArray = function(length) {
-  var array = []
-  for (i= 0; i < length; i++) {
-    array.push(createPictureComments);
-  }
-  return array;
-}
-
-var commentsArray = pictureCommentsArray(getRandomNumber(1, 10));
-
-console.log(commentsArray);
 
 var childImg;
 var childInfo;
@@ -92,11 +80,10 @@ var array = []
 childImg = createPictureLink.appendChild(createPictureImg);
 childInfo = createPictureLink.appendChild(createPictureInfo);
 childLikes = childInfo.appendChild(createPictureLikes);
-
-childComments = childInfo.appendChild(createPictureComments); // спан с коментами по идее нужно вставить commentsArray вместо createPictureComments
+childComments = childInfo.appendChild(createPictureComments);
 
 createPictureLink.setAttribute('href', '#');
-createPictureImg.setAttribute('src', ' ');
+createPictureImg.setAttribute('src', 'photos/' + getRandomNumber(1, 25) + '.jpg');
 createPictureImg.setAttribute('width', '182');
 createPictureImg.setAttribute('height', '182');
 createPictureImg.setAttribute('alt', 'Случайная фотография');
@@ -104,12 +91,11 @@ createPictureImg.setAttribute('alt', 'Случайная фотография');
 createPictureLink.classList.add("picture");
 createPictureImg.classList.add("picture__img");
 createPictureInfo.classList.add("picture__info");
-// createPictureComments.classList.add("picture__comments");
+createPictureComments.classList.add("picture__comments");
 createPictureLikes.classList.add("picture__likes");
 
 createPictureLikes.innerHTML = getRandomNumber(15, 200);
 createPictureComments.innerHTML = comments[getRandomNumber(0, 7)];
-
 
 array.push(createPictureLink);
 }
