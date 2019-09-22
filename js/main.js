@@ -62,9 +62,10 @@ var photos = createDemoDataArray(25);
 console.log(photos);
 
 // Создание DOM-элемента на основе JS-объекта
+var test = true;
 var PictureLink = function() {
-var array = [];
-  for (i = 0; i <= photos.length; i++) {
+
+  if (test) {
 
 var createPictureLink = document.createElement('a');
 var createPictureImg = document.createElement('img');
@@ -91,13 +92,14 @@ createPictureLikes.classList.add("picture__likes");
 
 }
 
-return array;
-
+return createPictureLink;
 }
 
-var PictureLinkBlock = PictureLink();
+var box = PictureLink();
 
-console.log(PictureLinkBlock);
+console.log(box);
+
+
 
 
 // createPictureLikes.innerHTML = getRandomNumber(15, 200);
