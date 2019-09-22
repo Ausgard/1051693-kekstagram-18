@@ -56,11 +56,12 @@ var createDemoDataArray = function (length) {
   }
   return array;
 }
-var photos = createDemoDataArray(25);
+var photos = createDemoDataArray(5);
 
 // Создание DOM-элемента на основе JS-объекта
+var createPhotoNode = function(element) {
 
-var PictureLink = function(length) {
+var pictureLink = function() {
 
 var createPictureLink = document.createElement('a');
 var createPictureImg = document.createElement('img');
@@ -73,13 +74,14 @@ var childInfo;
 var childComments;
 var childLikes;
 
-var array = []
+var photoBlock;
 
-  for (var i = 0; i < length; i++) {
+for (var i = 0; i < photos.length; i++) {
 
 childImg = createPictureLink.appendChild(createPictureImg);
 childInfo = createPictureLink.appendChild(createPictureInfo);
 childLikes = childInfo.appendChild(createPictureLikes);
+
 childComments = childInfo.appendChild(createPictureComments);
 
 createPictureLink.setAttribute('href', '#');
@@ -97,24 +99,44 @@ createPictureLikes.classList.add("picture__likes");
 createPictureLikes.innerHTML = getRandomNumber(15, 200);
 createPictureComments.innerHTML = comments[getRandomNumber(0, 7)];
 
-array.push(createPictureLink);
+
+photoBlock = createPictureLink;
+
 }
 
-return array;
+return photoBlock;
+
+} //вкладена ф-я
+
+for (var i = 0; i < photos.length; i++) {
+   pictureLink(photos[i]);
+   console.log(pictureLink());
 }
 
-var pictureLinkArray = PictureLink(photos.length);
+var pictureLinkResult = pictureLink();
 
-console.log(photos);
-console.log(pictureLinkArray[0]);
+return pictureLinkResult;
+
+} //Основна ф-я
+
+// var photoBlock = createPhotoNode();
+
+console.log(createPhotoNode());
 
 // Заполнение блока DOM-элементами на основе массива JS-объектов
 
+var insertPhotoBlock = function() {
 
+var test = document.querySelector('#picture');
+var fragment = document.createDocumentFragment();
 
+for (var i = 0; i < photos.length; i++) {
+  test.append(photoBlock);
+  console.log(photoBlock);
+}
 
-// var test = document.querySelector('#picture');
+return test;
 
-// console.log(test);
+}
 
-// createPictureLikes.innerHTML = getRandomNumber(15, 200);
+console.log(insertPhotoBlock());
