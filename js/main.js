@@ -56,16 +56,10 @@ var createDemoDataArray = function (length) {
   }
   return array;
 }
-
 var photos = createDemoDataArray(25);
 
-console.log(photos);
-
 // Создание DOM-элемента на основе JS-объекта
-var test = true;
-var PictureLink = function() {
-
-  if (test) {
+var PictureLink = function(length) {
 
 var createPictureLink = document.createElement('a');
 var createPictureImg = document.createElement('img');
@@ -73,10 +67,19 @@ var createPictureInfo = document.createElement('p');
 var createPictureComments = document.createElement('span');
 var createPictureLikes = document.createElement('span');
 
-var childImg = createPictureLink.appendChild(createPictureImg);
-var childInfo = createPictureLink.appendChild(createPictureInfo);
-var childComments = childInfo.appendChild(createPictureComments);
-var childComments = childInfo.appendChild(createPictureLikes);
+var childImg;
+var childInfo;
+var childComments;
+var childComments;
+
+var array = []
+
+  for (var i = 0; i < length; i++) {
+
+childImg = createPictureLink.appendChild(createPictureImg);
+childInfo = createPictureLink.appendChild(createPictureInfo);
+childComments = childInfo.appendChild(createPictureComments);
+childComments = childInfo.appendChild(createPictureLikes);
 
 createPictureLink.setAttribute('href', '#');
 createPictureImg.setAttribute('src', ' ');
@@ -90,15 +93,16 @@ createPictureInfo.classList.add("picture__info");
 createPictureComments.classList.add("picture__comments");
 createPictureLikes.classList.add("picture__likes");
 
+array.push(createPictureLink);
 }
 
-return createPictureLink;
+return array;
 }
 
-var box = PictureLink();
+var box = PictureLink(photos.length);
 
+console.log(photos);
 console.log(box);
-
 
 
 
