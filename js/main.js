@@ -99,10 +99,10 @@ array.push(createPictureLink);
 return array;
 }
 
-var box = PictureLink(photos.length);
+var pictureLinkArray = PictureLink(photos.length);
 
 console.log(photos);
-console.log(box);
+console.log(pictureLinkArray);
 
 
 
