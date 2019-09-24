@@ -59,24 +59,21 @@ var createDemoDataArray = function (length) {
 var photos = createDemoDataArray(25);
 
 // Создание DOM-элемента на основе JS-объекта
-var createPhotoNode = function(element) {
+var createPhotoNode = function(photo) {
   var createPictureLink = document.createElement('a');
   var createPictureImg = document.createElement('img');
   var createPictureInfo = document.createElement('p');
   var createPictureLikes = document.createElement('span');
   var createPictureComments = document.createElement('span');
-  var childImg;
   var childInfo;
-  var childComments;
-  var childLikes;
   var photoBlock;
-  for (var i = 0; i < photos.length; i++) {
-    childImg = createPictureLink.appendChild(createPictureImg);
+
+    createPictureLink.appendChild(createPictureImg);
     childInfo = createPictureLink.appendChild(createPictureInfo);
-    childLikes = childInfo.appendChild(createPictureLikes);
-    childComments = childInfo.appendChild(createPictureComments);
+    childInfo.appendChild(createPictureLikes);
+    childInfo.appendChild(createPictureComments);
     createPictureLink.setAttribute('href', '#');
-    createPictureImg.setAttribute('src', 'photos/' + getRandomNumber(1, 25) + '.jpg');
+    createPictureImg.setAttribute('src', '#');
     createPictureImg.setAttribute('width', '182');
     createPictureImg.setAttribute('height', '182');
     createPictureImg.setAttribute('alt', 'Случайная фотография');
@@ -85,10 +82,9 @@ var createPhotoNode = function(element) {
     createPictureInfo.classList.add("picture__info");
     createPictureComments.classList.add("picture__comments");
     createPictureLikes.classList.add("picture__likes");
-    createPictureLikes.innerHTML = getRandomNumber(15, 200);
-    createPictureComments.innerHTML = comments[getRandomNumber(0, 7)];
+    createPictureLikes.innerHTML = photos[0].likes;
+    createPictureComments.innerHTML = photos.comments;
     photoBlock = createPictureLink;
-  }
   return photoBlock;
 }
 
@@ -102,4 +98,4 @@ var insertPhotoNode = function() {
   return block;
 }
 
-insertPhotoNode();
+console.log(insertPhotoNode());
