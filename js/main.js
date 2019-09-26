@@ -64,14 +64,15 @@ var createPhotoNode = function (photo) {
   var createPictureComments = document.createElement('span');
   var childInfo;
   var photoBlock;
+  var squareLength = 182;
   createPictureLink.appendChild(createPictureImg);
   childInfo = createPictureLink.appendChild(createPictureInfo);
   childInfo.appendChild(createPictureLikes);
   childInfo.appendChild(createPictureComments);
   createPictureLink.setAttribute('href', '#');
   createPictureImg.setAttribute('src', photo.url);
-  createPictureImg.setAttribute('width', '182');
-  createPictureImg.setAttribute('height', '182');
+  createPictureImg.setAttribute('width', squareLength);
+  createPictureImg.setAttribute('height', squareLength);
   createPictureImg.setAttribute('alt', 'Случайная фотография');
   createPictureLink.classList.add('picture');
   createPictureImg.classList.add('picture__img');
