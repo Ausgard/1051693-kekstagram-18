@@ -92,7 +92,7 @@ for (var i = 0; i < photos.length; i++) {
 }
 block.appendChild(fragment);
 
-// Первая фотография из массива объектов в полноразмерном режиме
+// Создание большой фотографии из массива объектов в полноразмерном режиме
 
 var createBigPhotoNode = function (photo) {
 
