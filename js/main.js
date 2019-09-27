@@ -40,6 +40,7 @@ var createRandomComments = function (length) {
   }
   return array;
 };
+
 var createDemoDataArray = function (length) {
   var array = [];
   for (var i = 0; i < length; i++) {
@@ -97,16 +98,23 @@ var createBigPhotoNode = function (photo) {
   var bigPicture = document.querySelector('.big-picture');
   bigPicture.classList.remove('hidden');
   var bigPictureImg = document.querySelector('.big-picture__img img:nth-of-type(1)');
-  bigPictureImg.setAttribute('src', photo.url);
+  bigPictureImg.setAttribute('src', photos[0].url);
   var bigPicturelikes = document.querySelector('.likes-count');
-  bigPicturelikes.innerHTML = photo.likes;
+  bigPicturelikes.innerHTML = photos[0].likes;
   var bigPictureCommentsCount = document.querySelector('.comments-count');
   bigPictureCommentsCount.innerHTML = photo.comments.length;
   var bigPictureCommentsImg = document.querySelector('.social__picture');
-  bigPictureCommentsImg.setAttribute('src', 'img/avatar-' + getRandomNumber(1, 6) + '.svg');
-  bigPictureCommentsImg.setAttribute('alt', authors[getRandomNumber(0, 12)]);
-  var bigPictureCommentsText = document.querySelector('.social__comment p:nth-of-type(1)');
-  bigPictureCommentsText.innerHTML = comments[getRandomNumber(0, 7)];
+  bigPictureCommentsImg.setAttribute('src', photos[0].comments[0].avatar);
+  bigPictureCommentsImg.setAttribute('alt', photos[0].comments[0].name);
+  var bigPictureCommentsText = document.querySelectorAll('.social__comments p'); // Или лучше 2 раза querySelector?
+  bigPictureCommentsText[0].innerHTML = photos[0].comments[0].message;
+  bigPictureCommentsText[1].innerHTML = photos[0].comments[0].message; // Вот тут не уверен правильно ли
+  var bigPictureDescription = document.querySelector('.social__caption');
+  bigPictureDescription.innerHTML = photos[0].description;
+  var bigPictureSocialCommentCount = document.querySelector('.social__comment-count');
+  bigPictureSocialCommentCount.classList.add('visually-hidden');
+  var bigPictureSocialCommentLoader = document.querySelector('.comments-loader');
+  bigPictureSocialCommentLoader.classList.add('visually-hidden');
   return bigPicture;
 };
 createBigPhotoNode(photos[0]);
