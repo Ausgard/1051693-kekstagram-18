@@ -143,7 +143,7 @@ var createBigPhotoNode = function (photo) {
 createBigPhotoNode(photos[0]);
 
 var closeBigPhotoBlock = document.querySelector('.big-picture__cancel');
-closeBigPhotoBlock.addEventListener ('click', function () {
+closeBigPhotoBlock.addEventListener('click', function () {
   var bigPicture = document.querySelector('.big-picture');
   bigPicture.classList.add('hidden');
 });
