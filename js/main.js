@@ -94,27 +94,56 @@ for (var i = 0; i < photos.length; i++) {
 block.appendChild(fragment);
 
 // Создание большой фотографии из массива объектов в полноразмерном режиме
+
+// Создание блока коментариев
+var createBigPictureCommentBlock = function () {
+  var createBlock = document.createElement('li');
+  var createImg = document.createElement('img');
+  var createP = document.createElement('p');
+  createBlock.appendChild(createImg);
+  createBlock.appendChild(createP);
+  createBlock.classList.add('social__comment');
+  createImg.classList.add('social__picture');
+  createP.classList.add('social__text');
+  createImg.setAttribute('src', 'photo.avatar');
+  createImg.setAttribute('alt', 'photo.name');
+  createImg.setAttribute('width', '35');
+  createImg.setAttribute('height', '35');
+  createP.innerHTML = 'photo.comments';
+  return createBlock;
+};
+
 var createBigPhotoNode = function (photo) {
   var bigPicture = document.querySelector('.big-picture');
   bigPicture.classList.remove('hidden');
   var bigPictureImg = document.querySelector('.big-picture__img img:nth-of-type(1)');
-  bigPictureImg.setAttribute('src', photos[0].url);
+  bigPictureImg.setAttribute('src', photo.url);
   var bigPicturelikes = document.querySelector('.likes-count');
-  bigPicturelikes.innerHTML = photos[0].likes;
+  bigPicturelikes.innerHTML = photo.likes;
+  var bigPictureDescription = document.querySelector('.social__caption');
+  bigPictureDescription.innerHTML = photo.description;
   var bigPictureCommentsCount = document.querySelector('.comments-count');
   bigPictureCommentsCount.innerHTML = photo.comments.length;
-  var bigPictureCommentsImg = document.querySelector('.social__picture');
-  bigPictureCommentsImg.setAttribute('src', photos[0].comments[0].avatar);
-  bigPictureCommentsImg.setAttribute('alt', photos[0].comments[0].name);
-  var bigPictureCommentsText = document.querySelectorAll('.social__comments p'); // Или лучше 2 раза querySelector?
-  bigPictureCommentsText[0].innerHTML = photos[0].comments[0].message;
-  bigPictureCommentsText[1].innerHTML = photos[0].comments[0].message; // Вот тут не уверен правильно ли
-  var bigPictureDescription = document.querySelector('.social__caption');
-  bigPictureDescription.innerHTML = photos[0].description;
+  var bigPictureCommentsBlock = document.querySelector('.social__comments');
+  // Чистка блока
+  for (i = 0; i < bigPictureCommentsBlock.childNodes.length; i++) {
+    bigPictureCommentsBlock.innerHTML = '';
+  }
+  // Наполнение блока
+  for (i = 0; i < photo.comments.length; i++) {
+    bigPictureCommentsBlock.appendChild(createBigPictureCommentBlock());
+  }
   var bigPictureSocialCommentCount = document.querySelector('.social__comment-count');
   bigPictureSocialCommentCount.classList.add('visually-hidden');
   var bigPictureSocialCommentLoader = document.querySelector('.comments-loader');
   bigPictureSocialCommentLoader.classList.add('visually-hidden');
   return bigPicture;
 };
+
 createBigPhotoNode(photos[0]);
+
+var closeBigPhotoBlock = document.querySelector('.big-picture__cancel');
+closeBigPhotoBlock.addEventListener ('click', function () {
+  var bigPicture = document.querySelector('.big-picture');
+  bigPicture.classList.add('hidden');
+});
