@@ -58,6 +58,7 @@ var photos = createDemoDataArray(25);
 
 // Создание DOM-элемента на основе JS-объекта
 var createPhotoNode = function (photo) {
+  var squareLength = 182;
   var createPictureLink = document.createElement('a');
   var createPictureImg = document.createElement('img');
   var createPictureInfo = document.createElement('p');
@@ -71,8 +72,8 @@ var createPhotoNode = function (photo) {
   childInfo.appendChild(createPictureComments);
   createPictureLink.setAttribute('href', '#');
   createPictureImg.setAttribute('src', photo.url);
-  createPictureImg.setAttribute('width', '182');
-  createPictureImg.setAttribute('height', '182');
+  createPictureImg.setAttribute('width', squareLength);
+  createPictureImg.setAttribute('height', squareLength);
   createPictureImg.setAttribute('alt', 'Случайная фотография');
   createPictureLink.classList.add('picture');
   createPictureImg.classList.add('picture__img');
@@ -96,7 +97,8 @@ block.appendChild(fragment);
 // Создание большой фотографии из массива объектов в полноразмерном режиме
 
 // Создание блока коментариев
-var createBigPictureCommentBlock = function () {
+var createBigPictureCommentBlock = function (comments) {
+  var squareLength = 35;
   var createBlock = document.createElement('li');
   var createImg = document.createElement('img');
   var createP = document.createElement('p');
@@ -105,11 +107,11 @@ var createBigPictureCommentBlock = function () {
   createBlock.classList.add('social__comment');
   createImg.classList.add('social__picture');
   createP.classList.add('social__text');
-  createImg.setAttribute('src', 'photo.avatar');
-  createImg.setAttribute('alt', 'photo.name');
-  createImg.setAttribute('width', '35');
-  createImg.setAttribute('height', '35');
-  createP.innerHTML = 'photo.comments';
+  createImg.setAttribute('src', comments.avatar);
+  createImg.setAttribute('alt', comments.name);
+  createImg.setAttribute('width', squareLength);
+  createImg.setAttribute('height', squareLength);
+  createP.innerHTML = comments.message;
   return createBlock;
 };
 
@@ -131,7 +133,7 @@ var createBigPhotoNode = function (photo) {
   }
   // Наполнение блока
   for (i = 0; i < photo.comments.length; i++) {
-    bigPictureCommentsBlock.appendChild(createBigPictureCommentBlock());
+    bigPictureCommentsBlock.appendChild(createBigPictureCommentBlock(photo.comments[i]));
   }
   var bigPictureSocialCommentCount = document.querySelector('.social__comment-count');
   bigPictureSocialCommentCount.classList.add('visually-hidden');
