@@ -142,10 +142,160 @@ var createBigPhotoNode = function (photo) {
   return bigPicture;
 };
 
-createBigPhotoNode(photos[0]);
+// Открытие большой фотографии
+var identificatedClick = document.querySelector('.pictures a:nth-of-type(1)');
+var clickValue;
+identificatedClick.addEventListener('click', function () {
+  clickValue = 0;
+  createBigPhotoNode(photos[clickValue]);
+});
 
+identificatedClick = document.querySelector('.pictures a:nth-of-type(2)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 1;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(3)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 2;
+  createBigPhotoNode(photos[clickValue]);
+});
+identificatedClick = document.querySelector('.pictures a:nth-of-type(4)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 3;
+  createBigPhotoNode(photos[clickValue]);
+});
+identificatedClick = document.querySelector('.pictures a:nth-of-type(5)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 4;
+  createBigPhotoNode(photos[clickValue]);
+});
+identificatedClick = document.querySelector('.pictures a:nth-of-type(6)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 5;
+  createBigPhotoNode(photos[clickValue]);
+});
+identificatedClick = document.querySelector('.pictures a:nth-of-type(7)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 6;
+  createBigPhotoNode(photos[clickValue]);
+});
+identificatedClick = document.querySelector('.pictures a:nth-of-type(8)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 7;
+  createBigPhotoNode(photos[clickValue]);
+});
+identificatedClick = document.querySelector('.pictures a:nth-of-type(9)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 8;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(10)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 9;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(11)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 10;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(12)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 11;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(13)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 12;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(14)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 13;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(15)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 14;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(16)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 15;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(17)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 16;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(18)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 17;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(19)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 18;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(20)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 19;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(21)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 20;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(22)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 21;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(23)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 22;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(24)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 23;
+  createBigPhotoNode(photos[clickValue]);
+});
+
+identificatedClick = document.querySelector('.pictures a:nth-of-type(25)');
+identificatedClick.addEventListener('click', function () {
+  clickValue = 24;
+  createBigPhotoNode(photos[clickValue]);
+});
+// Закрытие большой фотографии
 var closeBigPhotoBlock = document.querySelector('.big-picture__cancel');
 closeBigPhotoBlock.addEventListener('click', function () {
   var bigPicture = document.querySelector('.big-picture');
   bigPicture.classList.add('hidden');
+});
+document.addEventListener('keydown', function (evt) {
+  var bigPicture = document.querySelector('.big-picture');
+  if (evt.keyCode === 27) {
+    bigPicture.classList.add('hidden');
+  }
 });
