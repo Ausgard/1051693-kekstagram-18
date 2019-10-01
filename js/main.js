@@ -96,7 +96,7 @@ block.appendChild(fragment);
 // Создание большой фотографии из массива объектов в полноразмерном режиме
 
 // Создание блока коментариев
-var createBigPictureCommentBlock = function (comments) {
+var createBigPictureCommentBlock = function (photo) {
   var squareLength = 35;
   var createBlock = document.createElement('li');
   var createImg = document.createElement('img');
@@ -106,11 +106,11 @@ var createBigPictureCommentBlock = function (comments) {
   createBlock.classList.add('social__comment');
   createImg.classList.add('social__picture');
   createP.classList.add('social__text');
-  createImg.setAttribute('src', comments.avatar);
-  createImg.setAttribute('alt', comments.name);
+  createImg.setAttribute('src', photo.avatar);
+  createImg.setAttribute('alt', photo.name);
   createImg.setAttribute('width', squareLength);
   createImg.setAttribute('height', squareLength);
-  createP.innerHTML = comments.message;
+  createP.innerHTML = photo.message;
   return createBlock;
 };
 
