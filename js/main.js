@@ -57,7 +57,7 @@ var photos = createDemoDataArray(25);
 
 // Создание DOM-элемента на основе JS-объекта
 var createPhotoNode = function (photo) {
-  var squareLengthPhoto = 182;
+  var squareLength = 182;
   var createPictureLink = document.createElement('a');
   var createPictureImg = document.createElement('img');
   var createPictureInfo = document.createElement('p');
@@ -71,8 +71,8 @@ var createPhotoNode = function (photo) {
   childInfo.appendChild(createPictureComments);
   createPictureLink.setAttribute('href', '#');
   createPictureImg.setAttribute('src', photo.url);
-  createPictureImg.setAttribute('width', squareLengthPhoto);
-  createPictureImg.setAttribute('height', squareLengthPhoto);
+  createPictureImg.setAttribute('width', squareLength);
+  createPictureImg.setAttribute('height', squareLength);
   createPictureImg.setAttribute('alt', 'Случайная фотография');
   createPictureLink.classList.add('picture');
   createPictureImg.classList.add('picture__img');
