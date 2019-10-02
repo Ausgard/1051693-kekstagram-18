@@ -57,7 +57,7 @@ var photos = createDemoDataArray(25);
 
 // Создание DOM-элемента на основе JS-объекта
 var createPhotoNode = function (photo) {
-  var squareLength = 182;
+  var squareLengthPhoto = 182;
   var createPictureLink = document.createElement('a');
   var createPictureImg = document.createElement('img');
   var createPictureInfo = document.createElement('p');
@@ -97,7 +97,7 @@ block.appendChild(fragment);
 
 // Создание блока коментариев
 var createBigPictureCommentBlock = function (photo) {
-  var squareLength = 35;
+  var squareLengthBlock = 35;
   var createBlock = document.createElement('li');
   var createImg = document.createElement('img');
   var createP = document.createElement('p');
