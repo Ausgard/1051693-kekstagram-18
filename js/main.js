@@ -71,8 +71,8 @@ var createPhotoNode = function (photo) {
   childInfo.appendChild(createPictureComments);
   createPictureLink.setAttribute('href', '#');
   createPictureImg.setAttribute('src', photo.url);
-  createPictureImg.setAttribute('width', squareLength);
-  createPictureImg.setAttribute('height', squareLength);
+  createPictureImg.setAttribute('width', squareLengthPhoto);
+  createPictureImg.setAttribute('height', squareLengthPhoto);
   createPictureImg.setAttribute('alt', 'Случайная фотография');
   createPictureLink.classList.add('picture');
   createPictureImg.classList.add('picture__img');
@@ -108,8 +108,8 @@ var createBigPictureCommentBlock = function (photo) {
   createP.classList.add('social__text');
   createImg.setAttribute('src', photo.avatar);
   createImg.setAttribute('alt', photo.name);
-  createImg.setAttribute('width', squareLength);
-  createImg.setAttribute('height', squareLength);
+  createImg.setAttribute('width', squareLengthBlock);
+  createImg.setAttribute('height', squareLengthBlock);
   createP.innerHTML = photo.message;
   return createBlock;
 };
