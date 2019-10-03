@@ -141,4 +141,13 @@ var createBigPhotoNode = function (photo) {
   bigPictureSocialCommentLoader.classList.add('visually-hidden');
   return bigPicture;
 };
-createBigPhotoNode(photos[0]);
+// createBigPhotoNode(photos[0]);
+
+// загрузка фото
+var test = document.querySelector('.img-upload__input');
+console.log(test);
+
+test.addEventListener("change", function(event) {
+console.log('Загрузка фотки');
+});
+
