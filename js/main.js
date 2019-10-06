@@ -227,9 +227,8 @@ var onHeatEffect = function () {
 };
 
 // регулятор
-var setupDialogElement = document.querySelector('.effect-level__line'); // блок для переміщення
-var dialogHandler = setupDialogElement.querySelector('.effect-level__pin'); // блок за який хватать
-
+var setupDialogElement = document.querySelector('.effect-level__line');
+var dialogHandler = setupDialogElement.querySelector('.effect-level__pin');
 dialogHandler.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
   var startCoords = {
