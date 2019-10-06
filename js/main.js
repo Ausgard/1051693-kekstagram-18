@@ -155,9 +155,10 @@ uploadFile.addEventListener('change', function () {
 var uploadFilterControls = document.querySelector('.effects__list'); // список инпутов (эффекты)
 var effectLevelRange = document.querySelector('.img-upload__effect-level'); // регулятор
 var prewiewImg = document.querySelector('.img-upload__preview img:nth-of-type(1)'); // фотка
-effectLevelRange.classList.add('hidden');
+var effectLevelPin = document.querySelector('.img-upload__effect-level');
 
 // событие: идентификация клика
+effectLevelRange.classList.add('hidden');
 uploadFilterControls.addEventListener('click', function () {
   if (event.target.tagName === 'INPUT') {
     switch (event.target.id) {
@@ -224,3 +225,42 @@ var onHeatEffect = function () {
   prewiewImg.classList.add('effects__preview--heat');
   effectLevelRange.classList.remove('hidden');
 };
+
+// регулятор
+var setupDialogElement = document.querySelector('.effect-level__line'); // блок для переміщення
+var dialogHandler = setupDialogElement.querySelector('.effect-level__pin'); // блок за який хватать
+
+dialogHandler.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+  var startCoords = {
+    x: evt.clientX
+  };
+  var dragged = false;
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+    dragged = true;
+    var shift = {
+      x: startCoords.x - moveEvt.clientX
+    };
+    startCoords = {
+      x: moveEvt.clientX
+    };
+    setupDialogElement.style.left = (setupDialogElement.offsetLeft - shift.x) + 'px';
+  };
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+
+    if (dragged) {
+      var onClickPreventDefault = function () {
+        evt.preventDefault();
+        dialogHandler.removeEventListener('click', onClickPreventDefault);
+      };
+      dialogHandler.addEventListener('click', onClickPreventDefault);
+    }
+  };
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+});
