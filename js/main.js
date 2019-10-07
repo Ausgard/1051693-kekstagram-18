@@ -141,4 +141,4 @@ var createBigPhotoNode = function (photo) {
   bigPictureSocialCommentLoader.classList.add('visually-hidden');
   return bigPicture;
 };
-createBigPhotoNode(photos[0]);
+// createBigPhotoNode(photos[0]);
