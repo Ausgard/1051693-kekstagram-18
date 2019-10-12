@@ -150,116 +150,90 @@ uploadFile.addEventListener('change', function () {
   uploadedImgBlock.classList.remove('hidden');
 });
 
-
 // переменные слайдера
 var uploadFilterControls = document.querySelector('.effects__list'); // список инпутов (эффекты)
 var effectLevelRange = document.querySelector('.img-upload__effect-level'); // регулятор
 var prewiewImg = document.querySelector('.img-upload__preview img:nth-of-type(1)'); // фотка
 var effectLevelPin = document.querySelector('.img-upload__effect-level');
-
-// событие: идентификация клика
+var newLeft;
+// событие: идентификация клика применение класса к фото
+uploadFilterControls.addEventListener('click', addFilter);
 effectLevelRange.classList.add('hidden');
-uploadFilterControls.addEventListener('click', function () {
+
+function addFilter () {
+  var chooseClass;
+  var addHidden = false;
   if (event.target.tagName === 'INPUT') {
     switch (event.target.id) {
       case 'effect-none':
-        onDefaultEffect();
-        if (event.target.id === 'effect-none') {
-          effectLevelRange.classList.add('hidden');
-        }
+        chooseClass = 'effects__preview--none';
+        addHidden = true;
         break;
       case 'effect-chrome':
-        onChromeEffect();
+        chooseClass = 'effects__preview--chrome';
+        prewiewImg.style.filter = 'grayscale('+ calculateSliderValue(1, 100, newLeft) +')';
         break;
       case 'effect-sepia':
-        onSepiaEffect();
+        chooseClass = 'effects__preview--sepia';
         break;
       case 'effect-marvin':
-        onMarvinEffect();
+        chooseClass = 'effects__preview--marvin';
         break;
       case 'effect-phobos':
-        onPhobosEffect();
+        chooseClass = 'effects__preview--phobos';
         break;
       case 'effect-heat':
-        onHeatEffect();
+        chooseClass = 'effects__preview--heat';
         break;
     }
-
-  } else {
-    return;
   }
-});
-
-// ф-и фильтров
-var onDefaultEffect = function () {
   prewiewImg.className = '';
-  prewiewImg.classList.add('effects__preview--none');
-};
-
-var onChromeEffect = function () {
-  prewiewImg.className = '';
-  prewiewImg.classList.add('effects__preview--chrome');
-  effectLevelRange.classList.remove('hidden');
-};
-
-var onSepiaEffect = function () {
-  prewiewImg.className = '';
-  prewiewImg.classList.add('effects__preview--sepia');
-  effectLevelRange.classList.remove('hidden');
-};
-
-var onMarvinEffect = function () {
-  prewiewImg.className = '';
-  prewiewImg.classList.add('effects__preview--marvin');
-  effectLevelRange.classList.remove('hidden');
-};
-
-var onPhobosEffect = function () {
-  prewiewImg.className = '';
-  prewiewImg.classList.add('effects__preview--phobos');
-  effectLevelRange.classList.remove('hidden');
-};
-
-var onHeatEffect = function () {
-  prewiewImg.className = '';
-  prewiewImg.classList.add('effects__preview--heat');
-  effectLevelRange.classList.remove('hidden');
+  prewiewImg.classList.add(chooseClass);
+  if (addHidden) {
+    effectLevelRange.classList.add('hidden');
+  } else {
+    effectLevelRange.classList.remove('hidden');
+  }
 };
 
 // регулятор
-var setupDialogElement = document.querySelector('.effect-level__line');
-var dialogHandler = setupDialogElement.querySelector('.effect-level__pin');
-dialogHandler.addEventListener('mousedown', function (evt) {
-  evt.preventDefault();
-  var startCoords = {
-    x: evt.clientX
-  };
-  var dragged = false;
-  var onMouseMove = function (moveEvt) {
-    moveEvt.preventDefault();
-    dragged = true;
-    var shift = {
-      x: startCoords.x - moveEvt.clientX
-    };
-    startCoords = {
-      x: moveEvt.clientX
-    };
-    setupDialogElement.style.left = (setupDialogElement.offsetLeft - shift.x) + 'px';
-  };
-  var onMouseUp = function (upEvt) {
-    upEvt.preventDefault();
+var slider = document.querySelector('.effect-level__line');
+var rangeControl = slider.querySelector('.effect-level__pin');
+var effectControl = slider.querySelector('.effect-level__depth');
 
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-
-    if (dragged) {
-      var onClickPreventDefault = function () {
-        evt.preventDefault();
-        dialogHandler.removeEventListener('click', onClickPreventDefault);
-      };
-      dialogHandler.addEventListener('click', onClickPreventDefault);
-    }
-  };
+function rangeControlHandeler () {
+var shiftX = event.clientX - rangeControl.getBoundingClientRect().left;
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
-});
+
+  function onMouseMove (event) {
+    event.preventDefault();
+    newLeft = event.clientX - slider.getBoundingClientRect().left - shiftX;
+    if (newLeft < 0) {
+      newLeft = 0;
+    }
+    var rightEdge = slider.offsetWidth - rangeControl.offsetWidth;
+    if (newLeft > rightEdge) {
+      newLeft = rightEdge;
+    }
+    rangeControl.style.left = newLeft + shiftX + 'px';
+    effectControl.style.width = newLeft + shiftX + 'px';
+
+  function calculateSliderValue (min, max, effectControl) {
+    if (effectControl === 0) {
+      return min;
+    } else {
+      return effectControl * ((max - min) / (slider.offsetWidth - rangeControl.offsetWidth / 2));
+    }
+  };
+
+console.log(prewiewImg.style.filter = 'grayscale('+ calculateSliderValue(1, 100, newLeft) +')');
+
+}; //onMouseMove end
+
+  function onMouseUp () {
+    document.removeEventListener('mouseup', onMouseUp);
+    document.removeEventListener('mousemove', onMouseMove);
+  };
+};
+rangeControl.addEventListener('mousedown', rangeControlHandeler);
