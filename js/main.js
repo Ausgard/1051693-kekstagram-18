@@ -145,10 +145,11 @@ var createBigPhotoNode = function (photo) {
 
 // показ интерфейса фильтров
 var uploadFile = document.querySelector('.img-upload__input');
-uploadFile.addEventListener('change', function () {
-  var uploadedImgBlock = document.querySelector('.img-upload__overlay');
+var uploadedImgBlock = document.querySelector('.img-upload__overlay');
+uploadFile.addEventListener('change', openUploadedImgBlock);
+function openUploadedImgBlock() {
   uploadedImgBlock.classList.remove('hidden');
-});
+};
 
 var uploadFilterControls = document.querySelector('.effects__list'); // список инпутов (эффекты)
 var effectLevelRange = document.querySelector('.img-upload__effect-level'); // регулятор
@@ -241,11 +242,10 @@ rangeControl.addEventListener('mousedown', rangeControlHandeler);
 var scaleBlock = document.querySelector('.img-upload__scale');
 var scaleValue = document.querySelector('.scale__control--value');
 var scaleValueCounter = scaleValue.value;
-// prewiewImg.style.transform = 'scale(1)';
+prewiewImg.style.transform = 'scale('+ zoomValue +')';
 var zoomStep = 0.25;
 var zoomValue = 1;
 // scaleValueCounter = '100%';
-// console.log(prewiewImg);
 
 scaleBlock.addEventListener('click', setZoom);
 
@@ -279,11 +279,32 @@ function setZoom(event) {
           zoomValue = 1;
           break;
     }
-    console.log(zoomValue);
   }
   zoomCount();
   function applyZoom() {
     prewiewImg.style.transform = 'scale('+ zoomValue +')';
+
+
   }
   applyZoom();
+  console.log((zoomValue * 100) + '%');
 }
+// закрытие
+var uploadedImgBlockCancel = document.querySelector('.img-upload__cancel');
+
+function closePreviewPhotoMouse (event) {
+  uploadedImgBlock.classList.add('hidden');
+}
+
+function closePreviewPhotoButton (event) {
+      if (event.keyCode === 27) {
+      if (uploadedImgBlock.classList.contains('hidden')) {
+        evt.preventDefault();
+      } else {
+        uploadedImgBlock.classList.add('hidden');
+      }
+    }
+}
+
+uploadedImgBlockCancel.addEventListener('click', closePreviewPhotoMouse);
+window.addEventListener('keydown', closePreviewPhotoButton);
