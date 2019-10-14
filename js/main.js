@@ -248,8 +248,6 @@ prewiewImg.style.transform = 'scale(1)';
 scaleBlock.addEventListener('click', setZoom);
 
 function setZoom(event) {
-  var zoomStep = 0.25;
-  var zoomValue = 1;
   var button = event.target.className;
   if (button) {
     var values = {
@@ -260,7 +258,8 @@ function setZoom(event) {
   }
   var appliedZoom = values[button];
   // console.log(appliedZoom);
-
+    var zoomStep = 0.25;
+    var zoomValue = 1;
   function zoomCount() {
     switch (appliedZoom) {
       case 'zoom_in':
@@ -279,6 +278,7 @@ function setZoom(event) {
         break;
     }
   }
-  // console.log(zoomValue);
-  // console.log(zoomStep);
+  zoomCount();
+  console.log(appliedZoom);
+  console.log(zoomValue);
 }
