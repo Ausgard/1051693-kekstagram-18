@@ -241,7 +241,9 @@ rangeControl.addEventListener('mousedown', rangeControlHandeler);
 var scaleBlock = document.querySelector('.img-upload__scale');
 var scaleValue = document.querySelector('.scale__control--value');
 var scaleValueCounter = scaleValue.value;
-prewiewImg.style.transform = 'scale(1)';
+// prewiewImg.style.transform = 'scale(1)';
+var zoomStep = 0.25;
+var zoomValue = 1;
 // scaleValueCounter = '100%';
 // console.log(prewiewImg);
 
@@ -257,10 +259,7 @@ function setZoom(event) {
     };
   }
   var appliedZoom = values[button];
-  // console.log(appliedZoom);
-    var zoomStep = 0.25;
-    var zoomValue = 1;
-  function zoomCount() {
+  function zoomCount(event) {
     switch (appliedZoom) {
       case 'zoom_in':
         if (zoomValue === 1) {
@@ -276,9 +275,15 @@ function setZoom(event) {
           zoomValue = zoomValue - zoomStep;
         }
         break;
+      case 'zoom_standart':
+          zoomValue = 1;
+          break;
     }
+    console.log(zoomValue);
   }
   zoomCount();
-  console.log(appliedZoom);
-  console.log(zoomValue);
+  function applyZoom() {
+    prewiewImg.style.transform = 'scale('+ zoomValue +')';
+  }
+  applyZoom();
 }
