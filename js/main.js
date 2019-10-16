@@ -159,14 +159,15 @@ var newLeft;
 
 effectLevelRange.classList.add('hidden');
 var sliderLength = 450;
+var effect = 'effects__preview--none';
 var appliedFilter = 'effects__preview--none';
-var currentFilterPercentage = 0.2;
+var currentFilterPercentage = 1;
 var filterValue = '';
 var previewPhoto = document.querySelector('.img-upload__preview img');
 uploadFilterControls.addEventListener('click', setFilter);
 
-function setFilter(event) {
-  var effect = event.target.id;
+function setFilter() {
+  effect = event.target.id;
   if (effect) {
     var filters = {
       'effect-none': 'effects__preview--none',
@@ -241,16 +242,23 @@ rangeControl.addEventListener('mousedown', rangeControlHandeler);
 // Масштаб
 var scaleBlock = document.querySelector('.img-upload__scale');
 var scaleValue = document.querySelector('.scale__control--value');
-var scaleValueCounter = scaleValue.value;
 prewiewImg.style.transform = 'scale('+ zoomValue +')';
 var zoomStep = 0.25;
 var zoomValue = 1;
-// scaleValueCounter = '100%';
+var button = 'scale__control  scale__control--value';
+var scaleValueCounter;
+
+function setScaleValueCounter() {
+scaleValueCounter = ((zoomValue * 100) + '%');
+scaleValue.setAttribute('value', scaleValueCounter);
+}
+setScaleValueCounter();
 
 scaleBlock.addEventListener('click', setZoom);
 
-function setZoom(event) {
-  var button = event.target.className;
+function setZoom() {
+
+  button = event.target.className;
   if (button) {
     var values = {
       'scale__control  scale__control--smaller': 'zoom_out',
@@ -279,32 +287,47 @@ function setZoom(event) {
           zoomValue = 1;
           break;
     }
+    setScaleValueCounter();
   }
   zoomCount();
   function applyZoom() {
     prewiewImg.style.transform = 'scale('+ zoomValue +')';
-
-
   }
   applyZoom();
-  console.log((zoomValue * 100) + '%');
 }
 // закрытие
 var uploadedImgBlockCancel = document.querySelector('.img-upload__cancel');
 
-function closePreviewPhotoMouse (event) {
+function closePreviewPhotoMouse(event) {
   uploadedImgBlock.classList.add('hidden');
+  setDefaultFilterValue();
 }
 
-function closePreviewPhotoButton (event) {
+function closePreviewPhotoButton(event) {
       if (event.keyCode === 27) {
       if (uploadedImgBlock.classList.contains('hidden')) {
-        evt.preventDefault();
       } else {
         uploadedImgBlock.classList.add('hidden');
+        setDefaultFilterValue();
       }
     }
 }
-
 uploadedImgBlockCancel.addEventListener('click', closePreviewPhotoMouse);
 window.addEventListener('keydown', closePreviewPhotoButton);
+
+function setDefaultFilterValue() {
+  prewiewImg.style.transform = 'scale('+ zoomValue +')';
+  zoomStep = 0.25;
+  zoomValue = 1;
+  button = 'scale__control  scale__control--value';
+  effectLevelRange.classList.add('hidden');
+  sliderLength = 450;
+  appliedFilter = 'effects__preview--none';
+  currentFilterPercentage = 1;
+  filterValue = '';
+  var effectsPreviewNoneInput = document.querySelector('.effects__radio');
+  effectsPreviewNoneInput.checked = true;
+  setFilter();
+  applyFilter();
+  setZoom();
+}
