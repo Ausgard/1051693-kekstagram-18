@@ -297,20 +297,28 @@ function setZoom() {
 }
 // закрытие
 var uploadedImgBlockCancel = document.querySelector('.img-upload__cancel');
+var ploadFormButton = document.querySelector('.img-upload__submit');
+var hashtagInput = document.querySelector('.text__hashtags');
+
+function closePreviewPhotoButton(event) {
+var hashtagInputActive;
+if (document.activeElement === hashtagInput) {
+  hashtagInputActive = true;
+  } else {
+    hashtagInputActive = false;
+  }
+  if (event.keyCode === 27) {
+  if (uploadedImgBlock.classList.contains('hidden') || hashtagInputActive) {
+  } else {
+      setDefaultFilterValue();
+      uploadedImgBlock.classList.add('hidden');
+    }
+  }
+}
 
 function closePreviewPhotoMouse(event) {
   uploadedImgBlock.classList.add('hidden');
   setDefaultFilterValue();
-}
-
-function closePreviewPhotoButton(event) {
-      if (event.keyCode === 27) {
-      if (uploadedImgBlock.classList.contains('hidden')) {
-      } else {
-        uploadedImgBlock.classList.add('hidden');
-        setDefaultFilterValue();
-      }
-    }
 }
 uploadedImgBlockCancel.addEventListener('click', closePreviewPhotoMouse);
 window.addEventListener('keydown', closePreviewPhotoButton);
@@ -331,3 +339,46 @@ function setDefaultFilterValue() {
   applyFilter();
   setZoom();
 }
+
+// валидация хештегов
+function createHashtagArray(event) {
+  event.preventDefault();
+  var separator = ' ';
+  var string = hashtagInput.value;
+  var array = [];
+  array = string.split(separator, 5);
+
+  function validationErrors(createHashtagArray) {
+
+    for (var i = 0; i < array.length; i++) {
+    if (array[i].charAt(0) === '#') {
+    } else {
+      console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег должен начинаться со знака "#"');
+    }
+    if (array[i].length === 1 && array[i].charAt(0) === '#') {
+      console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег не может состоять только со знака "#"');
+    } else {
+    }
+    if (array[i].charAt(array[i].length - 1) === ',' || array[i].charAt(array[i].length - 1) === '.') {
+      console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-теги должны разделяться пробелом');
+    } else {
+    }
+    if (array[i] === array[i]) {
+      console.log('Ошибка: ' + '"' + array[i] + '"' + ' один и тот же хэш-тег не может быть использован дважды');
+    } else {
+    }
+    if (array.length < 5) {
+    } else {
+      console.log('Ошибка: нельзя указать больше пяти хэш-тегов');
+    }
+    if (array[i].length <= 20) {
+    } else {
+      console.log('Ошибка: ' + '"' + array[i] + '"' +' максимальная длина одного хэш-тега 20 символов');
+    }
+    } //цикл
+
+}
+  validationErrors();
+}
+
+ploadFormButton.addEventListener('click', createHashtagArray);
