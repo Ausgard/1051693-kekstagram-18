@@ -211,7 +211,7 @@ var slider = document.querySelector('.effect-level__line');
 var rangeControl = slider.querySelector('.effect-level__pin');
 var effectControl = slider.querySelector('.effect-level__depth');
 
-function rangeControlHandeler() {
+function rangeControlHandeler(event) {
   var shiftX = event.clientX - rangeControl.getBoundingClientRect().left;
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
@@ -247,27 +247,26 @@ var zoomStep = 0.25;
 var zoomValue = 1;
 var button = 'scale__control  scale__control--value';
 var scaleValueCounter;
-
+var zoomClassValues = 'zoom_standart';
 function setScaleValueCounter() {
 scaleValueCounter = ((zoomValue * 100) + '%');
 scaleValue.setAttribute('value', scaleValueCounter);
 }
-setScaleValueCounter();
+setScaleValueCounter(zoomValue);
 
 scaleBlock.addEventListener('click', setZoom);
 
-function setZoom() {
-
+function setZoom(event) {
   button = event.target.className;
   if (button) {
-    var values = {
+    zoomClassValues = {
       'scale__control  scale__control--smaller': 'zoom_out',
       'scale__control  scale__control--bigger': 'zoom_in',
       'scale__control  scale__control--value': 'zoom_standart'
     };
   }
-  var appliedZoom = values[button];
-  function zoomCount(event) {
+  var appliedZoom = zoomClassValues[button];
+  function zoomCount() {
     switch (appliedZoom) {
       case 'zoom_in':
         if (zoomValue === 1) {
@@ -325,7 +324,6 @@ window.addEventListener('keydown', closePreviewPhotoButton);
 
 function setDefaultFilterValue() {
   prewiewImg.style.transform = 'scale('+ zoomValue +')';
-  zoomStep = 0.25;
   zoomValue = 1;
   button = 'scale__control  scale__control--value';
   effectLevelRange.classList.add('hidden');
@@ -337,43 +335,83 @@ function setDefaultFilterValue() {
   effectsPreviewNoneInput.checked = true;
   setFilter();
   applyFilter();
-  setZoom();
+  setZoom(event);
 }
 
 // валидация хештегов
 function createHashtagArray(event) {
   event.preventDefault();
+  var flag;
   var separator = ' ';
-  var string = hashtagInput.value;
+  var inputString = hashtagInput.value;
   var array = [];
-  array = string.split(separator, 5);
+  var upperCaseArray = [];
+  array = inputString.split(separator);
 
+  function removeSpaces(array) {
+    array.sort();
+    for (var i = 0; i < array.length; i++)
+    for (var j = i + 1; j < array.length;)
+    if (array[i] === '') {
+      array.splice(i, 1);
+    } else {
+      j++;
+    }
+  }
+removeSpaces(array);
+  function findIdenticalHashtag(array) { //#rr #uy #RR #wkdjn
+    upperCaseArray = upperCaseArray.concat(array);
+    for (i = 0; i < upperCaseArray.length; i++) {
+      upperCaseArray[i] = upperCaseArray[i].toUpperCase();
+    }
+    for (var i = 0; i < upperCaseArray.length; i++)
+    for (var j = i + 1; j < upperCaseArray.length;)
+    if (upperCaseArray[i] === upperCaseArray[j]) {
+      upperCaseArray.splice(i, 1);
+    } else {
+      j++;
+    }
+    console.log(array);
+    console.log(upperCaseArray);
+    comparisonArrays(array, upperCaseArray);
+  }
+  function comparisonArrays(array, upperCaseArray) {
+    if (array.length === upperCaseArray.length) {
+      flag = true;
+    } else {
+      flag = false;
+    }
+    console.log(flag);
+    return flag;
+  }
+  findIdenticalHashtag(array);
   function validationErrors(createHashtagArray) {
 
     for (var i = 0; i < array.length; i++) {
     if (array[i].charAt(0) === '#') {
     } else {
-      console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег должен начинаться со знака "#"');
+      // console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег должен начинаться со знака "#"');
     }
     if (array[i].length === 1 && array[i].charAt(0) === '#') {
-      console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег не может состоять только со знака "#"');
+      // console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег не может состоять только со знака "#"');
     } else {
     }
     if (array[i].charAt(array[i].length - 1) === ',' || array[i].charAt(array[i].length - 1) === '.') {
-      console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-теги должны разделяться пробелом');
+      // console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-теги должны разделяться пробелом');
     } else {
     }
-    if (array[i] === array[i]) {
-      console.log('Ошибка: ' + '"' + array[i] + '"' + ' один и тот же хэш-тег не может быть использован дважды');
+    if (flag) {
     } else {
+      console.log('Ошибка: один и тот же хэш-тег не может быть использован дважды');
     }
-    if (array.length < 5) {
+    if (array.length <= 5) {
     } else {
-      console.log('Ошибка: нельзя указать больше пяти хэш-тегов');
+      // console.log('Ошибка: нельзя указать больше пяти хэш-тегов');
     }
     if (array[i].length <= 20) {
+
     } else {
-      console.log('Ошибка: ' + '"' + array[i] + '"' +' максимальная длина одного хэш-тега 20 символов');
+      // console.log('Ошибка: ' + '"' + array[i] + '"' +' максимальная длина одного хэш-тега 20 символов');
     }
     } //цикл
 
