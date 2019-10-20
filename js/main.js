@@ -371,8 +371,6 @@ removeSpaces(array);
     } else {
       j++;
     }
-    console.log(array);
-    console.log(upperCaseArray);
     comparisonArrays(array, upperCaseArray);
   }
   function comparisonArrays(array, upperCaseArray) {
@@ -381,7 +379,6 @@ removeSpaces(array);
     } else {
       flag = false;
     }
-    console.log(flag);
     return flag;
   }
   findIdenticalHashtag(array);
