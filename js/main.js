@@ -232,7 +232,7 @@ function rangeControlHandeler(event) {
     applyFilter();
   }
 
-  function onMouseUp() {
+  function onMouseUp(event) {
     document.removeEventListener('mouseup', onMouseUp);
     document.removeEventListener('mousemove', onMouseMove);
   }
@@ -340,7 +340,6 @@ function setDefaultFilterValue() {
 
 // валидация хештегов
 function createHashtagArray(event) {
-  event.preventDefault();
   var flag;
   var separator = ' ';
   var inputString = hashtagInput.value;
@@ -413,7 +412,7 @@ removeSpaces(array);
     } //цикл
 
 }
-  validationErrors();
+  validationErrors(createHashtagArray);
 }
 
 ploadFormButton.addEventListener('click', createHashtagArray);
