@@ -359,7 +359,7 @@ function createHashtagArray(event) {
     }
   }
 removeSpaces(array);
-  function findIdenticalHashtag(array) { //#rr #uy #RR #wkdjn
+  function findIdenticalHashtag(array) {
     upperCaseArray = upperCaseArray.concat(array);
     for (i = 0; i < upperCaseArray.length; i++) {
       upperCaseArray[i] = upperCaseArray[i].toUpperCase();
@@ -387,28 +387,28 @@ removeSpaces(array);
     for (var i = 0; i < array.length; i++) {
     if (array[i].charAt(0) === '#') {
     } else {
-      // console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег должен начинаться со знака "#"');
+       hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег должен начинаться со знака "#"');
     }
     if (array[i].length === 1 && array[i].charAt(0) === '#') {
-      // console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег не может состоять только со знака "#"');
+      hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег не может состоять только со знака "#"');
     } else {
     }
     if (array[i].charAt(array[i].length - 1) === ',' || array[i].charAt(array[i].length - 1) === '.') {
-      // console.log('Ошибка: ' + '"' + array[i] + '"' + ' хеш-теги должны разделяться пробелом');
+      hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' + ' хеш-теги должны разделяться пробелом');
     } else {
     }
     if (flag) {
     } else {
-      console.log('Ошибка: один и тот же хэш-тег не может быть использован дважды');
+      hashtagInput.setCustomValidity('Ошибка: один и тот же хэш-тег не может быть использован дважды');
     }
     if (array.length <= 5) {
     } else {
-      // console.log('Ошибка: нельзя указать больше пяти хэш-тегов');
+      hashtagInput.setCustomValidity('Ошибка: нельзя указать больше пяти хэш-тегов');
     }
     if (array[i].length <= 20) {
 
     } else {
-      // console.log('Ошибка: ' + '"' + array[i] + '"' +' максимальная длина одного хэш-тега 20 символов');
+      hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' +' максимальная длина одного хэш-тега 20 символов');
     }
     } //цикл
 
