@@ -216,7 +216,7 @@ function rangeControlHandeler(event) {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 
-  function onMouseMove() {
+  function onMouseMove(event) {
     event.preventDefault();
     newLeft = event.clientX - slider.getBoundingClientRect().left - shiftX;
     if (newLeft < 0) {
@@ -232,7 +232,7 @@ function rangeControlHandeler(event) {
     applyFilter();
   }
 
-  function onMouseUp() {
+  function onMouseUp(event) {
     document.removeEventListener('mouseup', onMouseUp);
     document.removeEventListener('mousemove', onMouseMove);
   }
