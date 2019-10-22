@@ -149,7 +149,7 @@ var uploadedImgBlock = document.querySelector('.img-upload__overlay');
 uploadFile.addEventListener('change', openUploadedImgBlock);
 function openUploadedImgBlock() {
   uploadedImgBlock.classList.remove('hidden');
-};
+}
 
 var uploadFilterControls = document.querySelector('.effects__list'); // список инпутов (эффекты)
 var effectLevelRange = document.querySelector('.img-upload__effect-level'); // регулятор
@@ -216,7 +216,7 @@ function rangeControlHandeler(event) {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 
-  function onMouseMove(event) {
+  function onMouseMove() {
     event.preventDefault();
     newLeft = event.clientX - slider.getBoundingClientRect().left - shiftX;
     if (newLeft < 0) {
@@ -232,7 +232,7 @@ function rangeControlHandeler(event) {
     applyFilter();
   }
 
-  function onMouseUp(event) {
+  function onMouseUp() {
     document.removeEventListener('mouseup', onMouseUp);
     document.removeEventListener('mousemove', onMouseMove);
   }
@@ -242,15 +242,15 @@ rangeControl.addEventListener('mousedown', rangeControlHandeler);
 // Масштаб
 var scaleBlock = document.querySelector('.img-upload__scale');
 var scaleValue = document.querySelector('.scale__control--value');
-prewiewImg.style.transform = 'scale('+ zoomValue +')';
+prewiewImg.style.transform = 'scale(' + zoomValue + ')';
 var zoomStep = 0.25;
 var zoomValue = 1;
 var button = 'scale__control  scale__control--value';
 var scaleValueCounter;
 var zoomClassValues = 'zoom_standart';
 function setScaleValueCounter() {
-scaleValueCounter = ((zoomValue * 100) + '%');
-scaleValue.setAttribute('value', scaleValueCounter);
+  scaleValueCounter = ((zoomValue * 100) + '%');
+  scaleValue.setAttribute('value', scaleValueCounter);
 }
 setScaleValueCounter(zoomValue);
 
@@ -283,14 +283,14 @@ function setZoom(event) {
         }
         break;
       case 'zoom_standart':
-          zoomValue = 1;
-          break;
+        zoomValue = 1;
+        break;
     }
     setScaleValueCounter();
   }
   zoomCount();
   function applyZoom() {
-    prewiewImg.style.transform = 'scale('+ zoomValue +')';
+    prewiewImg.style.transform = 'scale(' + zoomValue + ')';
   }
   applyZoom();
 }
@@ -300,22 +300,21 @@ var ploadFormButton = document.querySelector('.img-upload__submit');
 var hashtagInput = document.querySelector('.text__hashtags');
 
 function closePreviewPhotoButton(event) {
-var hashtagInputActive;
-if (document.activeElement === hashtagInput) {
-  hashtagInputActive = true;
+  var hashtagInputActive;
+  if (document.activeElement === hashtagInput) {
+    hashtagInputActive = true;
   } else {
     hashtagInputActive = false;
   }
   if (event.keyCode === 27) {
-  if (uploadedImgBlock.classList.contains('hidden') || hashtagInputActive) {
-  } else {
+    if (!uploadedImgBlock.classList.contains('hidden') || !hashtagInputActive) {
       setDefaultFilterValue();
       uploadedImgBlock.classList.add('hidden');
     }
   }
 }
 
-function closePreviewPhotoMouse(event) {
+function closePreviewPhotoMouse() {
   uploadedImgBlock.classList.add('hidden');
   setDefaultFilterValue();
 }
@@ -323,7 +322,7 @@ uploadedImgBlockCancel.addEventListener('click', closePreviewPhotoMouse);
 window.addEventListener('keydown', closePreviewPhotoButton);
 
 function setDefaultFilterValue() {
-  prewiewImg.style.transform = 'scale('+ zoomValue +')';
+  prewiewImg.style.transform = 'scale(' + zoomValue + ')';
   zoomValue = 1;
   button = 'scale__control  scale__control--value';
   effectLevelRange.classList.add('hidden');
@@ -339,7 +338,7 @@ function setDefaultFilterValue() {
 }
 
 // валидация хештегов
-function createHashtagArray(event) {
+function createHashtagArray() {
   var flag;
   var separator = ' ';
   var inputString = hashtagInput.value;
@@ -347,71 +346,62 @@ function createHashtagArray(event) {
   var upperCaseArray = [];
   array = inputString.split(separator);
 
-  function removeSpaces(array) {
+  function removeSpaces() {
     array.sort();
-    for (var i = 0; i < array.length; i++)
-    for (var j = i + 1; j < array.length;)
-    if (array[i] === '') {
-      array.splice(i, 1);
-    } else {
-      j++;
+    for (i = 0; i < array.length; i++) {
+      for (var j = i + 1; j < array.length;) {
+        if (array[i] === '') {
+          array.splice(i, 1);
+        } else {
+          j++;
+        }
+      }
     }
   }
-removeSpaces(array);
-  function findIdenticalHashtag(array) {
+  removeSpaces(array);
+  function findIdenticalHashtag() {
     upperCaseArray = upperCaseArray.concat(array);
     for (i = 0; i < upperCaseArray.length; i++) {
       upperCaseArray[i] = upperCaseArray[i].toUpperCase();
     }
-    for (var i = 0; i < upperCaseArray.length; i++)
-    for (var j = i + 1; j < upperCaseArray.length;)
-    if (upperCaseArray[i] === upperCaseArray[j]) {
-      upperCaseArray.splice(i, 1);
-    } else {
-      j++;
+    for (i = 0; i < upperCaseArray.length; i++) {
+      for (var j = i + 1; j < upperCaseArray.length;) {
+        if (upperCaseArray[i] === upperCaseArray[j]) {
+          upperCaseArray.splice(i, 1);
+        } else {
+          j++;
+        }
+      }
     }
     comparisonArrays(array, upperCaseArray);
   }
-  function comparisonArrays(array, upperCaseArray) {
-    if (array.length === upperCaseArray.length) {
-      flag = true;
-    } else {
-      flag = false;
-    }
-    return flag;
+  function comparisonArrays() {
+    flag = array.length !== upperCaseArray.length;
   }
   findIdenticalHashtag(array);
-  function validationErrors(createHashtagArray) {
+  function validationErrors() {
 
-    for (var i = 0; i < array.length; i++) {
-    if (array[i].charAt(0) === '#') {
-    } else {
-       hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег должен начинаться со знака "#"');
+    for (i = 0; i < array.length; i++) {
+      if (array[i].charAt(0) !== '#') {
+        hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег должен начинаться со знака "#"');
+      }
+      if (array[i].length === 1 && array[i].charAt(0) === '#') {
+        hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег не может состоять только со знака "#"');
+      }
+      if (array[i].charAt(array[i].length - 1) === ',' || array[i].charAt(array[i].length - 1) === '.') {
+        hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' + ' хеш-теги должны разделяться пробелом');
+      }
+      if (flag) {
+        hashtagInput.setCustomValidity('Ошибка: один и тот же хэш-тег не может быть использован дважды');
+      }
+      if (array.length > 5) {
+        hashtagInput.setCustomValidity('Ошибка: нельзя указать больше пяти хэш-тегов');
+      }
+      if (array[i].length > 20) {
+        hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' + ' максимальная длина одного хэш-тега 20 символов');
+      }
     }
-    if (array[i].length === 1 && array[i].charAt(0) === '#') {
-      hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' + ' хеш-тег не может состоять только со знака "#"');
-    } else {
-    }
-    if (array[i].charAt(array[i].length - 1) === ',' || array[i].charAt(array[i].length - 1) === '.') {
-      hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' + ' хеш-теги должны разделяться пробелом');
-    } else {
-    }
-    if (flag) {
-    } else {
-      hashtagInput.setCustomValidity('Ошибка: один и тот же хэш-тег не может быть использован дважды');
-    }
-    if (array.length <= 5) {
-    } else {
-      hashtagInput.setCustomValidity('Ошибка: нельзя указать больше пяти хэш-тегов');
-    }
-    if (array[i].length <= 20) {
-
-    } else {
-      hashtagInput.setCustomValidity('Ошибка: ' + '"' + array[i] + '"' +' максимальная длина одного хэш-тега 20 символов');
-    }
-    } //цикл
-
-}
+  }
   validationErrors(createHashtagArray);
 }
 
