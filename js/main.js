@@ -402,7 +402,7 @@ function createHashtagArray() {
       }
     }
   }
-  validationErrors(createHashtagArray);
+  validationErrors(array);
 }
 
 ploadFormButton.addEventListener('click', createHashtagArray);
