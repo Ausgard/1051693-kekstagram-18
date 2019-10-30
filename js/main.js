@@ -65,7 +65,6 @@ var createPhotoNode = function (photo) {
   var createPictureComments = document.createElement('span');
   var childInfo;
   var photoBlock;
-  var squareLength = 182;
   createPictureLink.appendChild(createPictureImg);
   childInfo = createPictureLink.appendChild(createPictureInfo);
   childInfo.appendChild(createPictureLikes);
@@ -141,6 +140,7 @@ var createBigPhotoNode = function (photo) {
   bigPictureSocialCommentLoader.classList.add('visually-hidden');
   return bigPicture;
 };
+
 // createBigPhotoNode(photos[0]);
 
 // показ интерфейса фильтров
@@ -211,7 +211,7 @@ var slider = document.querySelector('.effect-level__line');
 var rangeControl = slider.querySelector('.effect-level__pin');
 var effectControl = slider.querySelector('.effect-level__depth');
 
-function rangeControlHandeler(event) {
+function rangeControlHandeler() {
   var shiftX = event.clientX - rangeControl.getBoundingClientRect().left;
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
@@ -232,7 +232,7 @@ function rangeControlHandeler(event) {
     applyFilter();
   }
 
-  function onMouseUp(event) {
+  function onMouseUp() {
     document.removeEventListener('mouseup', onMouseUp);
     document.removeEventListener('mousemove', onMouseMove);
   }
