@@ -114,35 +114,6 @@ var createBigPictureCommentBlock = function (photo) {
   return createBlock;
 };
 
-var createBigPhotoNode = function (photo) {
-  var bigPicture = document.querySelector('.big-picture');
-  bigPicture.classList.remove('hidden');
-  var bigPictureImg = document.querySelector('.big-picture__img img:nth-of-type(1)');
-  bigPictureImg.setAttribute('src', photo.url);
-  var bigPicturelikes = document.querySelector('.likes-count');
-  bigPicturelikes.innerHTML = photo.likes;
-  var bigPictureDescription = document.querySelector('.social__caption');
-  bigPictureDescription.innerHTML = photo.description;
-  var bigPictureCommentsCount = document.querySelector('.comments-count');
-  bigPictureCommentsCount.innerHTML = photo.comments.length;
-  var bigPictureCommentsBlock = document.querySelector('.social__comments');
-  // Чистка блока
-  for (i = 0; i < bigPictureCommentsBlock.childNodes.length; i++) {
-    bigPictureCommentsBlock.innerHTML = '';
-  }
-  // Наполнение блока
-  for (i = 0; i < photo.comments.length; i++) {
-    bigPictureCommentsBlock.appendChild(createBigPictureCommentBlock(photo.comments[i]));
-  }
-  var bigPictureSocialCommentCount = document.querySelector('.social__comment-count');
-  bigPictureSocialCommentCount.classList.add('visually-hidden');
-  var bigPictureSocialCommentLoader = document.querySelector('.comments-loader');
-  bigPictureSocialCommentLoader.classList.add('visually-hidden');
-  return bigPicture;
-};
-
-// createBigPhotoNode(photos[0]);
-
 // показ интерфейса фильтров
 var uploadFile = document.querySelector('.img-upload__input');
 var uploadedImgBlock = document.querySelector('.img-upload__overlay');
