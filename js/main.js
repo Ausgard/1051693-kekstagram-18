@@ -340,3 +340,52 @@ function createHashtagArray() {
   validationErrors(array);
 }
 ploadFormButton.addEventListener('click', createHashtagArray);
+
+// Создание большой фотографии из массива объектов в полноразмерном режиме
+
+var createBigPictureCommentBlock = function (photo) {
+  var squareLengthBlock = 35;
+  var createBlock = document.createElement('li');
+  var createImg = document.createElement('img');
+  var createP = document.createElement('p');
+  createBlock.appendChild(createImg);
+  createBlock.appendChild(createP);
+  createBlock.classList.add('social__comment');
+  createImg.classList.add('social__picture');
+  createP.classList.add('social__text');
+  createImg.setAttribute('src', photo.avatar);
+  createImg.setAttribute('alt', photo.name);
+  createImg.setAttribute('width', squareLengthBlock);
+  createImg.setAttribute('height', squareLengthBlock);
+  createP.innerHTML = photo.message;
+  return createBlock;
+};
+
+// открытие большого фото
+
+function createBigPhotoNode(photo) {
+  var bigPicture = document.querySelector('.big-picture');
+  bigPicture.classList.remove('hidden');
+  var bigPictureImg = document.querySelector('.big-picture__img img:nth-of-type(1)');
+  bigPictureImg.setAttribute('src', photo.url);
+  var bigPicturelikes = document.querySelector('.likes-count');
+  bigPicturelikes.innerHTML = photo.likes;
+  var bigPictureDescription = document.querySelector('.social__caption');
+  bigPictureDescription.innerHTML = photo.description;
+  var bigPictureCommentsCount = document.querySelector('.comments-count');
+  bigPictureCommentsCount.innerHTML = photo.comments.length;
+  var bigPictureCommentsBlock = document.querySelector('.social__comments');
+  for (i = 0; i < bigPictureCommentsBlock.childNodes.length; i++) {
+    bigPictureCommentsBlock.innerHTML = '';
+  }
+  for (i = 0; i < photo.comments.length; i++) {
+    bigPictureCommentsBlock.appendChild(createBigPictureCommentBlock(photo.comments[i]));
+  }
+  var bigPictureSocialCommentCount = document.querySelector('.social__comment-count');
+  bigPictureSocialCommentCount.classList.add('visually-hidden');
+  var bigPictureSocialCommentLoader = document.querySelector('.comments-loader');
+  bigPictureSocialCommentLoader.classList.add('visually-hidden');
+  return bigPicture;
+};
+
+// createBigPhotoNode(photos[0]);
