@@ -341,6 +341,27 @@ function createHashtagArray() {
 }
 ploadFormButton.addEventListener('click', createHashtagArray);
 
+// Создание большой фотографии из массива объектов в полноразмерном режиме
+
+// Создание блока коментариев
+var createBigPictureCommentBlock = function (photo) {
+  var squareLengthBlock = 35;
+  var createBlock = document.createElement('li');
+  var createImg = document.createElement('img');
+  var createP = document.createElement('p');
+  createBlock.appendChild(createImg);
+  createBlock.appendChild(createP);
+  createBlock.classList.add('social__comment');
+  createImg.classList.add('social__picture');
+  createP.classList.add('social__text');
+  createImg.setAttribute('src', photo.avatar);
+  createImg.setAttribute('alt', photo.name);
+  createImg.setAttribute('width', squareLengthBlock);
+  createImg.setAttribute('height', squareLengthBlock);
+  createP.innerHTML = photo.message;
+  return createBlock;
+};
+
 var createBigPhotoNode = function (photo) {
   var bigPicture = document.querySelector('.big-picture');
   bigPicture.classList.remove('hidden');
@@ -366,4 +387,4 @@ var createBigPhotoNode = function (photo) {
   return bigPicture;
 };
 
-createBigPhotoNode(photos[1]);
+// createBigPhotoNode(photos[1]);
