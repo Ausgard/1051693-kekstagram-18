@@ -344,7 +344,7 @@ ploadFormButton.addEventListener('click', createHashtagArray);
 // Создание большой фотографии из массива объектов в полноразмерном режиме
 
 // Создание блока коментариев
-var createBigPictureCommentBlock = function (photo) {
+function createBigPictureCommentBlock(photo) {
   var squareLengthBlock = 35;
   var createBlock = document.createElement('li');
   var createImg = document.createElement('img');
@@ -360,9 +360,10 @@ var createBigPictureCommentBlock = function (photo) {
   createImg.setAttribute('height', squareLengthBlock);
   createP.innerHTML = photo.message;
   return createBlock;
-};
+}
 
-var createBigPhotoNode = function (photo) {
+function createBigPhotoNode(photo) {
+  createBigPictureCommentBlock(photo);
   var bigPicture = document.querySelector('.big-picture');
   bigPicture.classList.remove('hidden');
   var bigPictureImg = document.querySelector('.big-picture__img img:nth-of-type(1)');
@@ -385,6 +386,24 @@ var createBigPhotoNode = function (photo) {
   var bigPictureSocialCommentLoader = document.querySelector('.comments-loader');
   bigPictureSocialCommentLoader.classList.add('visually-hidden');
   return bigPicture;
-};
+}
 
-// createBigPhotoNode(photos[1]);
+// Открытие большого фото
+
+var targetPhoto = document.querySelector('.pictures');
+
+function openBigPhoto(event) {
+  var array = [];
+  var identificatedClick;
+
+  for (i = 1; i < photos.length + 1; i++) {
+    identificatedClick = document.querySelector('.pictures a:nth-of-type(' + i + ')');
+    array.push(identificatedClick);
+    if (identificatedClick.childNodes[0] === event.target) {
+      createBigPhotoNode(photos[array.length - 1]);
+      i = array.length;
+    }
+  }
+}
+
+targetPhoto.addEventListener('click', openBigPhoto);
