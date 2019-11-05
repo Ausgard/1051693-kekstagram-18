@@ -399,7 +399,7 @@ function openBigPhoto(event) {
     targetElement = event.target.children[0];
   } else {
     if (event.which === 1) {
-     targetElement = event.target;
+      targetElement = event.target;
     }
   }
   var array = [];
@@ -418,10 +418,9 @@ var closeBigPhotoBtn = document.querySelector('.big-picture__cancel');
 
 function closeBigPhoto(event) {
   if (event.keyCode === 27 || event.which === 1) {
-      bigPicture.classList.add('hidden'); 
-    }
-    console.log(event.which);
+    bigPicture.classList.add('hidden');
   }
+}
 
 targetPhoto.addEventListener('click', openBigPhoto);
 targetPhoto.addEventListener('keydown', openBigPhoto);
