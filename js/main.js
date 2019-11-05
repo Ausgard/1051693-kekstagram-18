@@ -361,10 +361,10 @@ function createBigPictureCommentBlock(photo) {
   createP.innerHTML = photo.message;
   return createBlock;
 }
+var bigPicture = document.querySelector('.big-picture');
 
 function createBigPhotoNode(photo) {
   createBigPictureCommentBlock(photo);
-  var bigPicture = document.querySelector('.big-picture');
   bigPicture.classList.remove('hidden');
   var bigPictureImg = document.querySelector('.big-picture__img img:nth-of-type(1)');
   bigPictureImg.setAttribute('src', photo.url);
@@ -393,17 +393,37 @@ function createBigPhotoNode(photo) {
 var targetPhoto = document.querySelector('.pictures');
 
 function openBigPhoto(event) {
-  var array = [];
   var identificatedClick;
-
+  var targetElement;
+  if (event.which === 13) {
+    targetElement = event.target.children[0];
+  } else {
+    if (event.which === 1) {
+     targetElement = event.target;
+    }
+  }
+  var array = [];
   for (i = 1; i < photos.length + 1; i++) {
     identificatedClick = document.querySelector('.pictures a:nth-of-type(' + i + ')');
     array.push(identificatedClick);
-    if (identificatedClick.childNodes[0] === event.target) {
+
+    if (identificatedClick.childNodes[0] === targetElement) {
       createBigPhotoNode(photos[array.length - 1]);
       i = array.length;
     }
   }
 }
 
+var closeBigPhotoBtn = document.querySelector('.big-picture__cancel');
+
+function closeBigPhoto(event) {
+  if (event.keyCode === 27 || event.which === 1) {
+      bigPicture.classList.add('hidden'); 
+    }
+    console.log(event.which);
+  }
+
 targetPhoto.addEventListener('click', openBigPhoto);
+targetPhoto.addEventListener('keydown', openBigPhoto);
+closeBigPhotoBtn.addEventListener('click', closeBigPhoto);
+document.addEventListener('keydown', closeBigPhoto);
