@@ -426,3 +426,33 @@ targetPhoto.addEventListener('click', openBigPhoto);
 targetPhoto.addEventListener('keydown', openBigPhoto);
 closeBigPhotoBtn.addEventListener('click', closeBigPhoto);
 document.addEventListener('keydown', closeBigPhoto);
+
+// Валидация коменты
+
+var comentInput = document.querySelector('.text__description');
+
+function createComentString() {
+  var inputString = comentInput.value;
+  if (inputString.length > 140) {
+    comentInput.setCustomValidity('Длина коментария не должна превышать 140 символов');
+  }
+}
+
+ploadFormButton.addEventListener('click', createComentString);
+
+// закрытие
+
+function closeComentTextarea(event) {
+  var closeFlag;
+  if (document.activeElement === comentInput) {
+    closeFlag = true;
+  } else {
+    closeFlag = false;
+  }
+  if (event.keyCode === 27) {
+    if (!closeFlag) {
+      uploadedImgBlock.classList.add('hidden');
+    }
+  }
+}
+document.addEventListener('keydown', closeComentTextarea);
