@@ -444,7 +444,7 @@ ploadFormButton.addEventListener('click', createComentString);
 
 function closeComentTextarea(event) {
   var closeFlag;
-  if (document.activeElement === comentInput) {
+  if (document.activeElement === hashtagInput || document.activeElement === comentInput) {
     closeFlag = true;
   } else {
     closeFlag = false;
