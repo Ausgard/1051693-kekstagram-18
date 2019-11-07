@@ -249,27 +249,11 @@ var uploadedImgBlockCancel = document.querySelector('.img-upload__cancel');
 var ploadFormButton = document.querySelector('.img-upload__submit');
 var hashtagInput = document.querySelector('.text__hashtags');
 
-function closePreviewPhotoButton(event) {
-  var hashtagInputActive;
-  if (document.activeElement === hashtagInput) {
-    hashtagInputActive = true;
-  } else {
-    hashtagInputActive = false;
-  }
-  if (event.keyCode === 27) {
-    if (!uploadedImgBlock.classList.contains('hidden') || !hashtagInputActive) {
-      setDefaultFilterValue();
-      uploadedImgBlock.classList.add('hidden');
-    }
-  }
-}
-
 function closePreviewPhotoMouse() {
   uploadedImgBlock.classList.add('hidden');
   setDefaultFilterValue();
 }
 uploadedImgBlockCancel.addEventListener('click', closePreviewPhotoMouse);
-window.addEventListener('keydown', closePreviewPhotoButton);
 
 function setDefaultFilterValue() {
   prewiewImg.style.transform = 'scale(' + zoomValue + ')';
