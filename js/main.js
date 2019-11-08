@@ -455,4 +455,5 @@ function closeComentTextarea(event) {
     }
   }
 }
+
 document.addEventListener('keydown', closeComentTextarea);
