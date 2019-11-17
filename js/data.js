@@ -1,6 +1,6 @@
 'use strict';
 
-window.data = (function () {
+(function () {
 
   var block = document.querySelector('.pictures');
   var fragment = document.createDocumentFragment();
