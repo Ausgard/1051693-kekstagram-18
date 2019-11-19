@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-
+  var photos = window.photos;
+  var createBigPhotoNode = window.createBigPhotoNode;
   var bigPicture = document.querySelector('.big-picture');
   var targetPhoto = document.querySelector('.pictures');
   var closeBigPhotoBtn = document.querySelector('.big-picture__cancel');

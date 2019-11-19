@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-
+  var photos = window.photos;
+  var bigPicture = window.bigPicture;
   var block = document.querySelector('.pictures');
   var fragment = document.createDocumentFragment();
 
@@ -83,5 +84,4 @@
   block.appendChild(fragment);
 
   window.createBigPhotoNode = createBigPhotoNode;
-
 }());
